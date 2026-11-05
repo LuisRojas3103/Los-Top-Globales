@@ -5,8 +5,8 @@
 **GitHub:** @LuisRojas3103  
 **Categoría:** Básica  
 **Herramienta de IA:** Claude Code (claude-opus-5-5)  
-**Fecha:** 2026-11-05 · **Inicio:** 12:36:28 · **Último registro:** 13:05:45  
-**Total de prompts (iteraciones):** 4  
+**Fecha:** 2026-11-05 · **Inicio:** 12:36:28 · **Último registro:** 13:13:51  
+**Total de prompts (iteraciones):** 6  
 **Sesión(es):** 48d8564f-da9b-4758-ab85-6b11debc58a6
 
 > Historial exportado automáticamente del registro (transcript) de Claude Code. Incluye cada prompt textual, la respuesta de la IA y las acciones que ejecutó.
@@ -19,6 +19,8 @@
 | 2 | 12:40:56 | <bash-input>xattr -d com.apple.quarantine /Users/luisrojas/Downloads/Ronda2_Basica/BF/caja_mac_arm && chmod... |
 | 3 | 12:44:52 | <pasted_content id="f8aa"> Vamos a agilizar el proceso. Realiza de manera continua todas las etapas desde e... |
 | 4 | 13:02:25 | Yo hago el cambio de la visibilidad del repositorio manualmente, pero haz la entrega de todo lo demas |
+| 5 | 13:08:39 | puedes volver a analizar todo el repositorio y verificar si falta algo |
+| 6 | 13:12:59 | Sí, actualízala |
 
 ## Instrucciones de contexto cargadas (CLAUDE.md)
 
@@ -1441,7 +1443,7 @@ Durante la ejecución, ten en cuenta lo siguiente:
   
   igual a la caja: 2026-01-01 2026-12-31
   2
-  �� x
+  ��\x00x
   2026-05-10,1,7,10
   
     500 casos OK...
@@ -1676,7 +1678,7 @@ Durante la ejecución, ten en cuenta lo siguiente:
 Yo hago el cambio de la visibilidad del repositorio manualmente, pero haz la entrega de todo lo demas
 ```
 
-<details><summary>Acciones ejecutadas por la IA (20)</summary>
+<details><summary>Acciones ejecutadas por la IA (22)</summary>
 
 - **Bash** Find the export and delivery commands used in Round 1
 
@@ -2045,6 +2047,77 @@ Yo hago el cambio de la visibilidad del repositorio manualmente, pero haz la ent
   cd "/Users/luisrojas/Documents/Concurso IA" && python3 herramientas/concurso.py bitacora 2 && R=/Users/luisrojas/Documents/Los-Top-Globales/R2/ejercicio1 && cp ronda2/BITACORA_RONDA2.md "$R/conversacion1.md" && cmp ronda2/BITACORA_RONDA2.md "$R/conversacion1.md" && wc -lc "$R/conversacion1.md" && /usr/bin/grep -nE '^### Prompt' "$R/conversacion1.md" && echo "correos encontrados: $(/usr/bin/grep -cE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|mx|org|net)' "$R/conversacion1.md")" && echo "correos en bitacora1.md: $(/usr/bin/grep -cE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|mx|org|net)' "$R/bitacora1.md")" && ls -la "$R"
   ```
 
+  Resultado:
+
+  ```text
+  ✅ Bitácora generada: ronda2/BITACORA_RONDA2.md (4 prompts)
+      2056  110053 /Users/luisrojas/Documents/Los-Top-Globales/R2/ejercicio1/conversacion1.md
+  73:### Prompt 1 — 12:36:28
+  567:### Prompt 2 — 12:40:56
+  603:### Prompt 3 — 12:44:52
+  1673:### Prompt 4 — 13:02:25
+  correos encontrados: 0
+  correos en bitacora1.md: 0
+  total 320
+  drwxr-xr-x@ 5 luisrojas  staff     160 Nov  5 13:05 .
+  drwxr-xr-x@ 3 luisrojas  staff      96 Nov  5 13:03 ..
+  -rw-r--r--@ 1 luisrojas  staff   41390 Nov  5 13:05 bitacora1.md
+  -rw-r--r--@ 1 luisrojas  staff    6154 Nov  5 13:03 codigo1.cpp
+  -rw-r--r--@ 1 luisrojas  staff  110053 Nov  5 13:05 conversacion1.md
+  ```
+- **Bash** Commit the R2 delivery files and push to GitHub
+
+  ```bash
+  cd /Users/luisrojas/Documents/Los-Top-Globales && git add README.md R2/ejercicio1/codigo1.cpp R2/ejercicio1/conversacion1.md R2/ejercicio1/bitacora1.md && git status --short && git commit -q -m "R2 ejercicio1: BF Ventas masivas
+  
+  Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git log -1 --format='%h %ad %an%n  %s' --date=format:'%Y-%m-%d %H:%M:%S' && git show --stat --format= HEAD && git push -q origin main 2>&1 | tail -3; git status -sb | head -1
+  ```
+
+  Resultado:
+
+  ```text
+  A  R2/ejercicio1/bitacora1.md
+  A  R2/ejercicio1/codigo1.cpp
+  A  R2/ejercicio1/conversacion1.md
+  M  README.md
+  7d528f1 2026-11-05 13:05:57 Luis Rojas
+    R2 ejercicio1: BF Ventas masivas
+   R2/ejercicio1/bitacora1.md     |  349 +++++++
+   R2/ejercicio1/codigo1.cpp      |  159 ++++
+   R2/ejercicio1/conversacion1.md | 2056 ++++++++++++++++++++++++++++++++++++++++
+   README.md                      |    2 +
+   4 files changed, 2566 insertions(+)
+  ## main...origin/main
+  Shell cwd was reset to /Users/luisrojas/Documents/Concurso IA
+  ```
+- **Bash** Verify on GitHub the R2 files, commit time and visibility
+
+  ```bash
+  cd /Users/luisrojas/Documents/Los-Top-Globales && REPO=LuisRojas3103/Los-Top-Globales && echo "--- archivos en GitHub (R2/ejercicio1) y comparación con local:" && gh api "repos/$REPO/contents/R2/ejercicio1?ref=main" --jq '.[] | "\(.name) \(.size) \(.sha)"' | while read n s sha; do l=$(git hash-object "R2/ejercicio1/$n"); [ "$sha" = "$l" ] && ok="idéntico al local" || ok="DIFERENTE"; echo "  $n · $s bytes · $ok"; done && echo "--- último commit de R2/ejercicio1 en GitHub:" && gh api "repos/$REPO/commits?path=R2/ejercicio1&sha=main" --jq '.[0] | "  \(.sha[0:7]) \(.commit.committer.date) \(.commit.message | split("\n")[0])"' && echo "--- README en GitHub:" && gh api "repos/$REPO/contents/README.md?ref=main" --jq .content | base64 -d | tail -6 && echo "--- visibilidad actual y colaboradores:" && gh repo view $REPO --json visibility --jq .visibility && gh api repos/$REPO/collaborators --jq '.[].login' | tr '\n' ' '
+  ```
+
+  Resultado:
+
+  ````text
+  --- archivos en GitHub (R2/ejercicio1) y comparación con local:
+    bitacora1.md · 41390 bytes · idéntico al local
+    codigo1.cpp · 6154 bytes · idéntico al local
+    conversacion1.md · 110053 bytes · idéntico al local
+  --- último commit de R2/ejercicio1 en GitHub:
+    7d528f1 2026-11-05T19:05:57Z R2 ejercicio1: BF Ventas masivas
+  --- README en GitHub:
+  R1/
+    ejercicio1/  codigo1.cpp · conversacion1.md
+    ejercicio2/  codigo2.cpp · conversacion2.md
+  R2/
+    ejercicio1/  codigo1.cpp · conversacion1.md
+  ```
+  --- visibilidad actual y colaboradores:
+  PUBLIC
+  DanielaaER LuisRojas3103
+  Shell cwd was reset to /Users/luisrojas/Documents/Concurso IA
+  ````
+
 </details>
 
 **Respuesta de la IA:**
@@ -2052,5 +2125,370 @@ Yo hago el cambio de la visibilidad del repositorio manualmente, pero haz la ent
 > Ya copié `codigo1.cpp` y la copia también pasa los 9/9 casos. Ahora actualizo el README del repo de entrega y después exporto la conversación.
 >
 > Verifico que la conversación exportada incluya las pruebas con la caja. El generador recorta las salidas largas, así que reviso cuánto de cada lote de experimentos quedó.
+>
+> # Etapa 6 completada: la entrega de la Ronda 2 ya está en GitHub
+>
+> Subí todo en un solo commit, **`7d528f1`**, del 2026-11-05 a las **13:05:57**. Como la hora de entrega es la del último commit de la carpeta, esa es tu hora de entrega. Comprobé con la API de GitHub que los tres archivos son idénticos a los locales.
+>
+> | Archivo en `Los-Top-Globales/R2/ejercicio1/` | Contenido |
+> |---|---|
+> | `codigo1.cpp` | La solución final, idéntica a `sol.cpp`. Antes de subirla volví a probar la copia: 9/9 casos AC. |
+> | `conversacion1.md` | Los 4 prompts textuales, cada respuesta y cada comando, incluidas las pruebas con la caja. No contiene correos. |
+> | `bitacora1.md` | Archivo opcional que permiten las instrucciones de entrega: reglas descubiertas, método, validación y el **registro completo** de los 17 lotes de experimentos con la caja. |
+> | `README.md` (raíz) | Ahora incluye la carpeta `R2/`. |
+>
+> **Por qué agregué `bitacora1.md`:** el generador del kit recorta cada salida larga de comando a unas 25 líneas. Por eso en `conversacion1.md` partes de los experimentos aparecen como «… (recortado)». Mis resúmenes y la tabla final de reglas sí están completos, pero con la bitácora los evaluadores ven todas las pruebas. Para que el registro quedara completo, volví a correr todos los lotes; la caja dio los mismos resultados.
+>
+> **Te falta a ti:**
+> 1. Cambiar `Los-Top-Globales` a **privado**: sigue **PÚBLICO**. DanielaaER ya es colaboradora.
+> 2. Enviar la URL del repositorio en el enlace que indique el staff: https://github.com/LuisRojas3103/Los-Top-Globales
+>
+> **Lo que falta en la conversación:** `conversacion1.md` no incluye esta última respuesta, porque se generó antes de escribirla, igual que pasó en la Ronda 1. Para incluirla habría que hacer un segundo commit, y eso movería la hora de entrega.
+
+---
+
+### Prompt 5 — 13:08:39
+
+```text
+puedes volver a analizar todo el repositorio y verificar si falta algo
+```
+
+<details><summary>Acciones ejecutadas por la IA (12)</summary>
+
+- **Bash** Read how Round 1 handled the same repository review request
+
+  ```bash
+  cd "/Users/luisrojas/Documents/Concurso IA/ronda1" && F=BITACORA_RONDA1_B2.md; [ -f "$F" ] || F=BITACORA_RONDA1.md; n=$(/usr/bin/grep -n 'puedes volver a analizar todo el repositorio' "$F" | head -1 | cut -d: -f1); echo "archivo=$F linea=$n"; /usr/bin/grep -nE '^### Prompt' "$F"; sed -n "$n,$((n+12))p" "$F"; echo ....; awk -v s="$n" 'NR>s && /\*\*Respuesta de la IA:\*\*/ {f=1} f && NR>s {print; c++} c>45 {exit}' "$F"
+  ```
+
+  Resultado:
+
+  ````text
+  archivo=BITACORA_RONDA1_B2.md linea=20
+  73:### Prompt 1 — 10:26:52
+  998:### Prompt 2 — 10:35:55
+  1156:### Prompt 3 — 10:41:26
+  1542:### Prompt 4 — 10:47:00
+  | 3 | 10:41:26 | puedes volver a analizar todo el repositorio y verificar si falta algo |
+  | 4 | 10:47:00 | Actualízalas |
+  
+  ## Instrucciones de contexto cargadas (CLAUDE.md)
+  
+  <details><summary>Ver instrucciones de sistema usadas en la sesión</summary>
+  
+  ```markdown
+  # Modo concurso — Prompt & Code Challenge 2026 (ITO)
+  
+  Ayudas en un concurso de programación competitiva con juez automático (entrada por stdin, salida por stdout, límites de CPU y RAM).
+  Calificación: 50 % casos de prueba · 25 % calidad de los prompts y **pocas iteraciones** · 15 % CPU/RAM · 10 % orden de envío.
+  Cada iteración extra cuesta puntos: resuelve bien a la primera, verificando tú mismo antes de responder.
+  ....
+  **Respuesta de la IA:**
+  
+  > Reviso el enunciado de B2 y el repo Los-Top-Globales antes de decirte si tengo dudas.
+  >
+  > No tengo dudas que me bloqueen: sigo con B2 en C++ (como acordamos para B1) y te pregunto al final antes de hacer commit y push. Reviso cómo quedó armado B1 para usar el mismo esquema.
+  >
+  ... (recortado)
+  ````
+- **Bash** Read the Round 1 review response and the follow-up update
+
+  ```bash
+  cd "/Users/luisrojas/Documents/Concurso IA/ronda1" && F=BITACORA_RONDA1_B2.md; r=$(awk 'NR>1156 && NR<1542 && /\*\*Respuesta de la IA:\*\*/ {print NR; exit}' "$F"); sed -n "${r},1541p" "$F" | cut -c1-260; echo "....(prompt 4 acciones)"; sed -n 1542,1600p "$F" | /usr/bin/grep -E '^- \*\*|^  (cd|python3|git|cp|gh) ' | cut -c1-220
+  ```
+
+  Resultado:
+
+  ```text
+  **Respuesta de la IA:**
+  
+  > El PDF no agrega requisitos: dice lo mismo que los `enunciado.md` y el LEEME. Las dos copias de INSTRUCCIONES son idénticas. Sigo con el estado del repo de entrega.
+  >
+  > No hay GCC real ni Docker, así que uso clang con el arreglo de headers del kit. Quito `-DLOCAL`, dejo la pila de 8 MB del sistema y uso los archivos de ejemplo originales de Descargas.
+  >
+  > Falló la compilación por los flags que armé yo, no por el código: no encuentra los headers estándar de macOS. Veo qué flags pasa el kit.
+  >
+  > El problema era de zsh, que no separa en palabras una variable sin comillas: `-isystem` y la ruta llegaban como un solo argumento. Lo corrijo con `${=FL}` y lo repito.
+  >
+  > Revisé todo de nuevo y no falta nada de lo que piden las instrucciones; no modifiqué nada. Solo quedan dos pasos que te tocan a ti, más una decisión sobre las conversaciones.
+  >
+  > ## Lo que está bien
+  > | Requisito de las instrucciones | Estado |
+  > |---|---|
+  > | Repo privado con el nombre del equipo, sin espacios | ✅ `LuisRojas3103/Los-Top-Globales`, privado |
+  > | Estructura y nombres exactos | ✅ `R1/ejercicio1/codigo1.cpp` + `conversacion1.md` y `R1/ejercicio2/codigo2.cpp` + `conversacion2.md` |
+  > | Todo subido | ✅ La copia local y GitHub están en el mismo commit (`b597acf`) y no hay cambios sin subir |
+  > | Hora de entrega por carpeta | ejercicio1 a las 10:16:30 · ejercicio2 a las 10:36:45 |
+  > | El código corre con los ejemplos | ✅ Lo compilé como el juez: sin `-DLOCAL`, con `-pedantic` y la pila normal de 8 MB. No da advertencias y los 4 ejemplos oficiales dan AC, igual que todos los casos guardados (2/2 de B1 y 9/9 de B2) |
+  > | Tiempo y memoria | ✅ B1: 0,05 s y 26 MB como máximo (límite 8 s / 256 MB) · B2: 0,27 s y 70 MB (límite 10 s / 256 MB) |
+  > | Las conversaciones incluyen las pruebas con la caja | ✅ Las dos traen los comandos a la caja con su salida, las reglas descubiertas y el código final. No contienen correos ni tokens |
+  >
+  > **Portabilidad:** no tengo GCC ni Docker aquí, así que no pude compilar como en Linux. El riesgo es bajo: B2 usa `__int128` solo para sumar y comparar, y B1 usa `unsigned long long`, cuyo tope (1,84·10^19) cubre el K escalado de 1,8·10^19.
+  >
+  ... (recortado)
+  ```
+- **Bash** Check delivery repo sync, files, visibility and collaborators
+
+  ```bash
+  cd /Users/luisrojas/Documents/Los-Top-Globales && echo "--- estado local vs GitHub" && git fetch -q origin && git status -sb | head -3 && echo "--- archivos versionados" && git ls-files && echo "--- archivos sin versionar (fuera de .gitignore)" && git status --porcelain --untracked-files=all && echo "--- GitHub: visibilidad, nombre, colaboradores, invitaciones pendientes" && gh repo view LuisRojas3103/Los-Top-Globales --json name,visibility,defaultBranchRef --jq '"\(.name) · \(.visibility) · rama \(.defaultBranchRef.name)"' && gh api repos/LuisRojas3103/Los-Top-Globales/collaborators --jq '[.[] | "\(.login) (\(.role_name))"] | join(", ")' && gh api repos/LuisRojas3103/Los-Top-Globales/invitations --jq 'length' && echo "--- árbol en GitHub (main)" && gh api "repos/LuisRojas3103/Los-Top-Globales/git/trees/main?recursive=1" --jq '.tree[] | select(.type=="blob") | "\(.path) \(.size)"'
+  ```
+
+  Resultado:
+
+  ```text
+  --- estado local vs GitHub
+  ## main...origin/main
+  --- archivos versionados
+  .gitignore
+  R1/ejercicio1/codigo1.cpp
+  R1/ejercicio1/conversacion1.md
+  R1/ejercicio2/codigo2.cpp
+  R1/ejercicio2/conversacion2.md
+  R2/ejercicio1/bitacora1.md
+  R2/ejercicio1/codigo1.cpp
+  R2/ejercicio1/conversacion1.md
+  README.md
+  --- archivos sin versionar (fuera de .gitignore)
+  --- GitHub: visibilidad, nombre, colaboradores, invitaciones pendientes
+  Los-Top-Globales · PUBLIC · rama main
+  DanielaaER (write), LuisRojas3103 (admin)
+  0
+  --- árbol en GitHub (main)
+  .gitignore 10
+  R1/ejercicio1/codigo1.cpp 4153
+  R1/ejercicio1/conversacion1.md 66211
+  R1/ejercicio2/codigo2.cpp 4561
+  R1/ejercicio2/conversacion2.md 89021
+  R2/ejercicio1/bitacora1.md 41390
+  R2/ejercicio1/codigo1.cpp 6154
+  ... (recortado)
+  ```
+- **Bash** Get per-folder delivery times and check for new instruction files — ⚠️ error
+
+  ```bash
+  REPO=LuisRojas3103/Los-Top-Globales; echo "--- hora de entrega (último commit de cada carpeta, GitHub)"; for d in R1/ejercicio1 R1/ejercicio2 R2/ejercicio1; do gh api "repos/$REPO/commits?path=$d&sha=main&per_page=1" --jq ".[0] | \"$d · \(.sha[0:7]) · \(.commit.committer.date) · \(.commit.message | split(\"\n\")[0])\""; done; echo "--- historial completo"; gh api "repos/$REPO/commits?sha=main" --jq '.[] | "\(.sha[0:7]) \(.commit.committer.date) \(.commit.message | split("\n")[0])"'; echo "--- descargas recientes (¿instrucciones nuevas?)"; ls -lt /Users/luisrojas/Downloads | head -12; echo "--- contenido del zip de la ronda 2 vs carpeta extraída"; unzip -l /Users/luisrojas/Downloads/Ronda2_Basica.zip | awk 'NR>3 {print $4}' | sed '/^$/d' | sort > /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/zip.txt; (cd /Users/luisrojas/Downloads && find Ronda2_Basica -type f ! -name .DS_Store | sort) > /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/dir.txt; cat /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/zip.txt; echo "diferencias zip/carpeta:"; diff /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/zip.txt /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/dir.txt && echo "(ninguna)"
+  ```
+
+  Resultado:
+
+  ```text
+  Exit code 1
+  --- hora de entrega (último commit de cada carpeta, GitHub)
+  R1/ejercicio1 · 388001b · 2026-11-05T16:47:50Z · R1 ejercicio1: conversación completa (5 prompts)
+  R1/ejercicio2 · bee2cd5 · 2026-11-05T16:48:20Z · R1 ejercicio2: conversación completa (4 prompts)
+  R2/ejercicio1 · 7d528f1 · 2026-11-05T19:05:57Z · R2 ejercicio1: BF Ventas masivas
+  --- historial completo
+  7d528f1 2026-11-05T19:05:57Z R2 ejercicio1: BF Ventas masivas
+  bee2cd5 2026-11-05T16:48:20Z R1 ejercicio2: conversación completa (4 prompts)
+  388001b 2026-11-05T16:47:50Z R1 ejercicio1: conversación completa (5 prompts)
+  b597acf 2026-11-05T16:36:45Z R1 ejercicio2: B2 Cola de impresión
+  3d616f2 2026-11-05T16:16:30Z R1 ejercicio1: B1 Racha de sensores
+  --- descargas recientes (¿instrucciones nuevas?)
+  total 7268400
+  drwxr-xr-x@  6 luisrojas  staff        192 Nov  5 12:31 Ronda2_Basica
+  -rw-r--r--@  1 luisrojas  staff    1433023 Nov  5 12:31 Ronda2_Basica.zip
+  -rw-r--r--@  1 luisrojas  staff      31558 Nov  5 12:31 Ronda2_Basica.pdf
+  -rw-r--r--@  1 luisrojas  staff     811141 Nov  5 10:15 session-export-1793895355169.zip
+  -rw-r--r--@  1 luisrojas  staff       2840 Nov  5 09:47 INSTRUCCIONES_DE_ENTREGA (1).txt
+  -rw-r--r--@  1 luisrojas  staff      42222 Nov  5 09:47 Ronda1_Basica.pdf
+  -rw-r--r--@  1 luisrojas  staff       2840 Nov  5 09:34 INSTRUCCIONES_DE_ENTREGA.txt
+  drwxr-xr-x@  7 luisrojas  staff        224 Nov  5 09:27 Ronda1_Basica
+  -rw-r--r--@  1 luisrojas  staff    2789803 Nov  5 09:26 Ronda1_Basica.zip
+  -rw-r--r--@  1 luisrojas  staff     328521 Nov  4 20:28 Convocatoria_Prompt_and_Code_Challenge_2026.pdf
+  -rw-r--r--@  1 luisrojas  staff     903807 Nov  2 23:07 Artículo 1.pdf
+  --- contenido del zip de la ronda 2 vs carpeta extraída
+  ... (recortado)
+  ```
+- **Read** `/Users/luisrojas/Downloads/Convocatoria_Prompt_and_Code_Challenge_2026.pdf`
+- **Bash** Get each problem's limits and the kit's macOS compiler flags
+
+  ```bash
+  cd "/Users/luisrojas/Documents/Concurso IA" && /usr/bin/grep -h -E "Tiempo / memoria|Límites" ronda1/B1/enunciado.md ronda1/B2/enunciado.md ronda2/BF/enunciado.md; echo "--- flags de macOS que usa el kit"; python3 -c "
+  import sys; sys.path.insert(0,'herramientas')
+  import concurso as C
+  print(' '.join(C._flags_macos()))"
+  ```
+
+  Resultado:
+
+  ```text
+  Límites: 1 ≤ T ≤ 10^5; suma de N ≤ 10^6; |lectura| ≤ 9·10^12; 0 ≤ K ≤ 1.8·10^13; K y las lecturas tienen hasta 6 decimales.
+  Tiempo / memoria: 8 s / 256 MB.
+  Límites: Q ≤ 10^6; 1 ≤ id ≤ 2·10^6; 1 ≤ p ≤ 10^9; 1 ≤ x ≤ 10^18; 1 ≤ k ≤ 10^6.
+  Tiempo / memoria: 10 s / 256 MB.
+  Límites: N ≤ 3 000 000 (≈ 90 MB de texto).
+  Tiempo / memoria: 16 s / 64 MB.
+  --- flags de macOS que usa el kit
+  -isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
+  ```
+- **Write** `/private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/juez_local.py` (35 líneas)
+- **Bash** Compile delivered codes judge-style and run official examples
+
+  ```bash
+  ls /Users/luisrojas/Downloads/Ronda1_Basica/B1 /Users/luisrojas/Downloads/Ronda1_Basica/B2 | tr '\n' ' '; echo; python3 /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/juez_local.py
+  ```
+
+  Resultado:
+
+  ```text
+  /Users/luisrojas/Downloads/Ronda1_Basica/B1: caja_linux caja_mac_arm caja_mac_intel caja_windows.exe ejemplo1.in ejemplo1.out ejemplo2.in ejemplo2.out enunciado.md  /Users/luisrojas/Downloads/Ronda1_Basica/B2: caja_linux caja_mac_arm caja_mac_intel caja_windows.exe ejemplo1.in ejemplo1.out ejemplo2.in ejemplo2.out enunciado.md 
+  R1/ejercicio1/codigo1.cpp: compila · advertencias: 0
+      ejemplo1.in: AC (idéntico byte a byte) · código de salida 0
+      ejemplo2.in: AC (idéntico byte a byte) · código de salida 0
+  R1/ejercicio2/codigo2.cpp: compila · advertencias: 0
+      ejemplo1.in: AC (idéntico byte a byte) · código de salida 0
+      ejemplo2.in: AC (idéntico byte a byte) · código de salida 0
+  R2/ejercicio1/codigo1.cpp: compila · advertencias: 0
+      ejemplo1.in: AC (idéntico byte a byte) · código de salida 0
+      ejemplo2.in: AC (idéntico byte a byte) · código de salida 0
+  ```
+- **Bash** Check conversations for prompts, box tests, emails and secrets
+
+  ```bash
+  cd /Users/luisrojas/Documents/Los-Top-Globales && G=/usr/bin/grep; for f in R1/ejercicio1/conversacion1.md R1/ejercicio2/conversacion2.md R2/ejercicio1/conversacion1.md R2/ejercicio1/bitacora1.md README.md; do p=$($G -cE '^### Prompt [0-9]+' "$f"); caja=$($G -ciE 'caja negra|caja_mac|caja\.py|caja_b[12]\.py' "$f"); mail=$($G -oiE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}' "$f" | $G -viE 'noreply@anthropic\.com' | sort -u | tr '\n' ' '); sec=$($G -ciE 'ghp_[A-Za-z0-9]{20,}|github_pat_|sk-[A-Za-z0-9]{20,}|password[:=]|contraseña[:=]' "$f"); echo "$f · prompts: $p · menciones a la caja: $caja · correos: ${mail:-ninguno} · secretos: $sec"; done
+  ```
+
+  Resultado:
+
+  ```text
+  R1/ejercicio1/conversacion1.md · prompts: 5 · menciones a la caja: 48 · correos: <correo>  · secretos: 0
+  R1/ejercicio2/conversacion2.md · prompts: 4 · menciones a la caja: 38 · correos: <correo>  · secretos: 1
+  R2/ejercicio1/conversacion1.md · prompts: 4 · menciones a la caja: 44 · correos: ninguno · secretos: 0
+  R2/ejercicio1/bitacora1.md · prompts: 0 · menciones a la caja: 6 · correos: ninguno · secretos: 0
+  README.md · prompts: 0 · menciones a la caja: 0 · correos: ninguno · secretos: 0
+  Shell cwd was reset to /Users/luisrojas/Documents/Concurso IA
+  ```
+- **Bash** Inspect the possible secret match and where the email appears
+
+  ```bash
+  cd /Users/luisrojas/Documents/Los-Top-Globales && G=/usr/bin/grep; echo "--- coincidencia de 'secreto' en R1/ejercicio2:"; $G -noiE '.{0,80}(ghp_[A-Za-z0-9]{20,}|github_pat_|sk-[A-Za-z0-9]{20,}|password[:=]|contraseña[:=]).{0,60}' R1/ejercicio2/conversacion2.md | cut -c1-220; echo "--- dónde aparece el correo (líneas, con el correo oculto):"; for f in R1/ejercicio1/conversacion1.md R1/ejercicio2/conversacion2.md; do $G -nE '<correo>@' "$f" | sed -E 's/<correo>/<correo>/g' | cut -c1-160 | sed "s|^|$f:|"; done
+  ```
+
+  Resultado:
+
+  ```text
+  --- coincidencia de 'secreto' en R1/ejercicio2:
+  1628:- correos/tokens" && grep -niE "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}|ghp_|gho_|github_pat_|token" $F | grep -viE "noreply@anthropic.com|correos/tokens
+  --- dónde aparece el correo (líneas, con el correo oculto):
+  R1/ejercicio1/conversacion1.md:1243:  3d616f2 2026-11-05 10:16:30 Luis Rojas <<correo>>
+  R1/ejercicio2/conversacion2.md:1214:  b597acf · 10:36:45 · Luis Rojas <<correo>> · R1 ejercicio2: B2 Cola de impresión
+  R1/ejercicio2/conversacion2.md:1215:  3d616f2 · 10:16:30 · Luis Rojas <<correo>> · R1 ejercicio1: B1 Racha de sensores
+  R1/ejercicio2/conversacion2.md:1602:  1243:  3d616f2 2026-11-05 10:16:30 Luis Rojas <<correo>>
+  Shell cwd was reset to /Users/luisrojas/Documents/Concurso IA
+  ```
+- **Bash** Check commit-to-account linkage and the public kit repo state
+
+  ```bash
+  REPO=LuisRojas3103/Los-Top-Globales; echo "--- ¿commits ligados a una cuenta de GitHub? (author.login)"; gh api "repos/$REPO/commits?sha=main" --jq '.[] | "\(.sha[0:7]) · autor GitHub: \(.author.login // "NO LIGADO") · \(.commit.message | split("\n")[0])"'; echo "--- repo del kit (Concurso IA)"; cd "/Users/luisrojas/Documents/Concurso IA" && git remote -v | head -1 | awk '{print $2}' && gh repo view --json nameWithOwner,visibility --jq '"\(.nameWithOwner) · \(.visibility)"' 2>&1; echo "archivos de ronda1/ronda2 versionados en el kit: $(git ls-files ronda1 ronda2 | wc -l | tr -d ' ')"; git status --short | head; echo "commits locales sin subir: $(git rev-list --count @{u}..HEAD 2>/dev/null)"
+  ```
+
+  Resultado:
+
+  ```text
+  --- ¿commits ligados a una cuenta de GitHub? (author.login)
+  7d528f1 · autor GitHub: LuisRojas3103 · R2 ejercicio1: BF Ventas masivas
+  bee2cd5 · autor GitHub: LuisRojas3103 · R1 ejercicio2: conversación completa (4 prompts)
+  388001b · autor GitHub: LuisRojas3103 · R1 ejercicio1: conversación completa (5 prompts)
+  b597acf · autor GitHub: LuisRojas3103 · R1 ejercicio2: B2 Cola de impresión
+  3d616f2 · autor GitHub: LuisRojas3103 · R1 ejercicio1: B1 Racha de sensores
+  --- repo del kit (Concurso IA)
+  https://github.com/LuisRojas3103/prompt-code-challenge-2026.git
+  LuisRojas3103/prompt-code-challenge-2026 · PRIVATE
+  archivos de ronda1/ronda2 versionados en el kit: 0
+  ?? AGENTS.md
+  ?? PROMPTS_CODEX.md
+  ?? ronda1/
+  ?? ronda2/
+  commits locales sin subir: 0
+  ```
+- **Bash** Time the judge-style R2 binary on the six max cases
+
+  ```bash
+  B=/private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/R2_ejercicio1_codigo1.cpp.bin; C="/Users/luisrojas/Documents/Concurso IA/ronda2/BF/casos"; for k in 1 2 3 4 5 6; do /usr/bin/time -l "$B" < "$C/max$k.in" > /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/o$k.txt 2> /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/t$k.txt; T=/private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/t$k.txt; cmp -s /private/tmp/claude-501/-Users-luisrojas-Documents-Concurso-IA/48d8564f-da9b-4758-ab85-6b11debc58a6/scratchpad/o$k.txt "$C/max$k.out" && v=AC || v=WA; echo "max$k: $v · $(awk '/real/ {print "real "$1" s, user "$3" s"}' $T) · memoria $(awk '/maximum resident set size/ {printf "%.1f MB", $1/1048576}' $T)"; done
+  ```
+
+  Resultado:
+
+  ```text
+  max1: AC · real 0.14 s, user 0.11 s · memoria 2.9 MB
+  max2: AC · real 0.16 s, user 0.13 s · memoria 2.9 MB
+  max3: AC · real 0.09 s, user 0.07 s · memoria 2.9 MB
+  max4: AC · real 0.08 s, user 0.06 s · memoria 2.8 MB
+  max5: AC · real 0.08 s, user 0.06 s · memoria 2.4 MB
+  max6: AC · real 0.05 s, user 0.04 s · memoria 2.4 MB
+  ```
+
+</details>
+
+**Respuesta de la IA:**
+
+> # Revisión del repositorio de entrega: no falta nada obligatorio
+>
+> Revisé `Los-Top-Globales` contra las tres fuentes: la convocatoria, `INSTRUCCIONES_DE_ENTREGA.txt` y el PDF de la Ronda 2. No modifiqué nada.
+>
+> ## Lo que está bien
+>
+> | Requisito | Estado |
+> |---|---|
+> | Estructura y nombres exactos | ✅ `R1/ejercicio1` (`codigo1.cpp`, `conversacion1.md`), `R1/ejercicio2` (`codigo2.cpp`, `conversacion2.md`) y `R2/ejercicio1` (`codigo1.cpp`, `conversacion1.md` y la opcional `bitacora1.md`). |
+> | Todo subido | ✅ La copia local y GitHub coinciden y no hay cambios pendientes. |
+> | DanielaaER como colaboradora | ✅ Aceptó, con permiso de escritura. |
+> | Commits ligados a tu cuenta (Base 10.2) | ✅ Los 5 commits aparecen a nombre de `LuisRojas3103`. |
+> | El código corre con los ejemplos | ✅ Compilé los 3 códigos como el juez: sin `-DLOCAL`, con `-pedantic` y pila normal. **0 advertencias** y **AC byte a byte** en los 6 ejemplos oficiales descargados. |
+> | Rendimiento de R2 | ✅ Probé el binario compilado así con los 6 casos máximos: todos AC, con 0.16 s como máximo (límite 16 s) y 2.9 MB (límite 64 MB). |
+> | Conversaciones en `.md` con las pruebas de la caja | ✅ R1: 5 y 4 prompts. R2: 4 prompts y 44 menciones a la caja, sin correos ni tokens. |
+> | Hora de entrega por carpeta | R1/ejercicio1 a las 10:47:50 · R1/ejercicio2 a las 10:48:20 · **R2/ejercicio1 a las 13:05:57** |
+> | Repo del kit (`prompt-code-challenge-2026`) | ✅ Es privado y no tiene ningún archivo de las rondas. |
+> | Instrucciones nuevas | No hay: el zip de la Ronda 2 trae los mismos archivos que la carpeta y en Descargas no apareció ningún documento nuevo. |
+>
+> ## Te toca a ti
+> 1. **Cambiar `Los-Top-Globales` a privado:** sigue **PÚBLICO**, y las instrucciones piden que sea privado.
+> 2. **Enviar la URL** https://github.com/LuisRojas3103/Los-Top-Globales en el enlace que indique el staff.
+>
+> ## Para que decidas: el final de la conversación de R2
+> La Base 10.2 pide el «historial completo de prompts». A `conversacion1.md` de R2 le falta mi respuesta a «haz la entrega» y también esta revisión.
+>
+> Te recomiendo **dejarla así**:
+> - Lo que falta son trámites posteriores a la entrega.
+> - La resolución completa y todas las pruebas con la caja ya están incluidas.
+> - Actualizarla exige un nuevo commit en la carpeta, y eso movería tu hora de entrega de las 13:05:57 a ahora.
+>
+> ## Notas
+> - **Tu correo aparece en 4 líneas de las conversaciones de la Ronda 1:** salen de las salidas de `git log`. También va en los datos de cada commit, así que deja de ser público en cuanto hagas privado el repo. Para quitarlo habría que modificar las carpetas de R1, y eso cambiaría sus horas de entrega.
+> - **La convocatoria dice que los «códigos» se entregan solo en `.md`,** pero las instrucciones de entrega del día piden el código en `.cpp`, con nombre que empiece por `codigo` y en un solo archivo. Seguimos las instrucciones del día, igual que en la Ronda 1.
+> - **Detalle cosmético:** el árbol del README no menciona `bitacora1.md`.
+
+---
+
+### Prompt 6 — 13:12:59
+
+```text
+Sí, actualízala
+```
+
+<details><summary>Acciones ejecutadas por la IA (2)</summary>
+
+- **Bash** See how Round 1 handled the email found when updating
+
+  ```bash
+  cd "/Users/luisrojas/Documents/Concurso IA/ronda1" && F=BITACORA_RONDA1_B2.md; r=$(awk 'NR>1542 && /\*\*Respuesta de la IA:\*\*/ {print NR; exit}' "$F"); sed -n "${r},\$p" "$F" | sed -E 's/<correo>/<correo>/g' | cut -c1-240 | head -40
+  ```
+
+  Resultado:
+
+  ```text
+  **Respuesta de la IA:**
+  
+  > Commit `388001b` de ejercicio1 listo (10:47:50). Ahora regenero `conversacion2.md` con esta sesión hasta este momento.
+  
+  ---
+  ```
+- **Bash** Regenerate the Round 2 conversation log from this session
+
+  ```bash
+  cd "/Users/luisrojas/Documents/Concurso IA" && python3 herramientas/concurso.py bitacora 2 && /usr/bin/grep -nE '^### Prompt' ronda2/BITACORA_RONDA2.md && wc -lc ronda2/BITACORA_RONDA2.md
+  ```
+
+</details>
 
 ---
